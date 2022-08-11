@@ -20,8 +20,8 @@ class Controller():
 					raise SystemExit
 				if event.type == pygame.MOUSEBUTTONDOWN:
 					if draw_button.is_over(mouse_pos):
-						self.model.draw_line()
 						self.view.redraw(screen, SCREEN_WIDTH, SCREEN_HEIGHT, draw_button)
+						self.model.draw_og_tri(screen, SCREEN_WIDTH, SCREEN_HEIGHT)
 						pygame.display.update()
 
 

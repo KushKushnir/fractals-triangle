@@ -56,11 +56,11 @@ class Main():
 		model = m.Model()
 		view = v.View(model)
 		controller = c.Controller(model, view)
-
 		#set up buttons here
-		draw_button = Button("#4ecbc4", SCREEN_WIDTH*0.5, SCREEN_HEIGHT*0.5, 100, 100, "Draw")
+		draw_button = Button("#4ecbc4", SCREEN_WIDTH*0.85, SCREEN_HEIGHT*0.1, 80, 50, "Draw")
 		view.redraw(screen, SCREEN_WIDTH, SCREEN_HEIGHT, draw_button)
 		controller.run(draw_button, screen, SCREEN_WIDTH, SCREEN_HEIGHT)
+		pygame.display.flip()
 
 #SET FRACTALS
 #EXCEPTIONS
