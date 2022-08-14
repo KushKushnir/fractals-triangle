@@ -8,12 +8,15 @@ class View():
 		print("View init")
 
 	def redraw(self, screen, SCREEN_WIDTH, SCREEN_HEIGHT, 
-		right_triangle_button, up_triangle_button, left_triangle_button):
+		right_triangle_button, up_triangle_button, 
+		left_triangle_button, reset_button):
 
-		screen.fill((214, 169, 105))
+		screen.fill(("#191970"))
 		right_triangle_button.draw(screen, "black")
 		up_triangle_button.draw(screen, "black")
 		left_triangle_button.draw(screen, "black")
+		left_triangle_button.draw(screen, "black")
+		reset_button.draw(screen, "black")
 		pygame.display.flip()
 
 

@@ -125,6 +125,10 @@ class Model():
 			self.draw_triangles(screen, SCREEN_WIDTH, SCREEN_HEIGHT, i)
 
 
+	def reset(self):
+		self.num_triangles = 0
+
+
 	def midpoint(self, z1, z2):
 		return ((z1 - z2) //2) + z2
 
@@ -144,15 +148,15 @@ class Model():
 				(self.og_tri.right[0], self.og_tri.right[1]), 3)# x1, y1
 		else:
 			#draw bot
-			pygame.draw.line(screen, "black", 
+			pygame.draw.line(screen, "white", 
 				(self.og_tri.bot[2], self.og_tri.bot[3]),# x2, y2
 				(self.og_tri.bot[0], self.og_tri.bot[1]), 3)# x1, y1
 			#Draw left
-			pygame.draw.line(screen, "black",
+			pygame.draw.line(screen, "white",
 				(self.og_tri.left[2], self.og_tri.left[3]),# x2, y2
 				(self.og_tri.left[0], self.og_tri.left[1]), 3)# x1, y1
 			#draw right
-			pygame.draw.line(screen, "black", 
+			pygame.draw.line(screen, "white", 
 				(self.og_tri.right[2], self.og_tri.right[3]),# x2, y2
 				(self.og_tri.right[0], self.og_tri.right[1]), 3)# x1, y1
 

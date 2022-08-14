@@ -64,11 +64,16 @@ class Main():
 			SCREEN_WIDTH*0.75, SCREEN_HEIGHT*0.1, 80, 50, "^")
 		left_triangle_button = Button("#4ecbc4", 
 			SCREEN_WIDTH*0.65, SCREEN_HEIGHT*0.1, 80, 50, "<")
+		reset_button = Button("#4ecbc4", 
+			SCREEN_WIDTH*0.1, SCREEN_HEIGHT*0.1, 80, 50, "Reset")
 		
 		view.redraw(screen, SCREEN_WIDTH, SCREEN_HEIGHT, 
-			right_triangle_button, up_triangle_button, left_triangle_button)
+			right_triangle_button, up_triangle_button, 
+			left_triangle_button, reset_button)
 
-		controller.run(right_triangle_button, up_triangle_button, left_triangle_button, screen, SCREEN_WIDTH, SCREEN_HEIGHT)
+		controller.run(right_triangle_button, up_triangle_button, 
+			left_triangle_button, reset_button, screen, 
+			SCREEN_WIDTH, SCREEN_HEIGHT)
 		pygame.display.flip()
 
 #SET FRACTALS
