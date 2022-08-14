@@ -10,7 +10,9 @@ class Controller():
 		print("Controller init")
 
 	#CANT MAKE RESISABLE RN, FIX IF POSSIBLE
-	def run(self, draw_button, screen, SCREEN_WIDTH, SCREEN_HEIGHT):
+	def run(self, 
+		right_triangle_button, up_triangle_button, left_triangle_button, 
+		screen, SCREEN_WIDTH, SCREEN_HEIGHT):
 		while self.model.end_game == 0:
 			for event in pygame.event.get():
 				mouse_pos = pygame.mouse.get_pos()
@@ -19,9 +21,24 @@ class Controller():
 				if event.type == pygame.QUIT:
 					raise SystemExit
 				if event.type == pygame.MOUSEBUTTONDOWN:
-					if draw_button.is_over(mouse_pos):
-						self.view.redraw(screen, SCREEN_WIDTH, SCREEN_HEIGHT, draw_button)
+					#If user clicks buttons
+					if right_triangle_button.is_over(mouse_pos):
+						self.view.redraw(screen, SCREEN_WIDTH, SCREEN_HEIGHT,
+							right_triangle_button, up_triangle_button, left_triangle_button)
 						self.model.draw_og_tri(screen, SCREEN_WIDTH, SCREEN_HEIGHT)
+						self.model.set_right_tri(screen, SCREEN_WIDTH, SCREEN_HEIGHT)
+						pygame.display.update()
+					if up_triangle_button.is_over(mouse_pos):
+						self.view.redraw(screen, SCREEN_WIDTH, SCREEN_HEIGHT,
+							right_triangle_button, up_triangle_button, left_triangle_button)
+						self.model.draw_og_tri(screen, SCREEN_WIDTH, SCREEN_HEIGHT)
+						self.model.set_up_tri(screen, SCREEN_WIDTH, SCREEN_HEIGHT)
+						pygame.display.update()
+					if left_triangle_button.is_over(mouse_pos):
+						self.view.redraw(screen, SCREEN_WIDTH, SCREEN_HEIGHT, 
+							right_triangle_button, up_triangle_button, left_triangle_button)
+						self.model.draw_og_tri(screen, SCREEN_WIDTH, SCREEN_HEIGHT)
+						self.model.set_left_tri(screen, SCREEN_WIDTH, SCREEN_HEIGHT)
 						pygame.display.update()
 
 

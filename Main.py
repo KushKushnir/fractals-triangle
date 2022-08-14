@@ -36,7 +36,7 @@ class Main():
 		pygame.display.init()
 		screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT), pygame.RESIZABLE)
 		screen.fill((100,100,100))
-		caption = "Fractals"
+		caption = "Sierpinski's Triangle"
 		pygame.display.set_caption(caption)
 		pygame.display.flip()
 
@@ -53,13 +53,22 @@ class Main():
 					pygame.display.flip()
 
 	def start(self, screen, SCREEN_WIDTH, SCREEN_HEIGHT):
+		#Initialise model view controller on start
 		model = m.Model()
 		view = v.View(model)
 		controller = c.Controller(model, view)
 		#set up buttons here
-		draw_button = Button("#4ecbc4", SCREEN_WIDTH*0.85, SCREEN_HEIGHT*0.1, 80, 50, "Draw")
-		view.redraw(screen, SCREEN_WIDTH, SCREEN_HEIGHT, draw_button)
-		controller.run(draw_button, screen, SCREEN_WIDTH, SCREEN_HEIGHT)
+		right_triangle_button = Button("#4ecbc4", 
+			SCREEN_WIDTH*0.85, SCREEN_HEIGHT*0.1, 80, 50, ">")
+		up_triangle_button = Button("#4ecbc4", 
+			SCREEN_WIDTH*0.75, SCREEN_HEIGHT*0.1, 80, 50, "^")
+		left_triangle_button = Button("#4ecbc4", 
+			SCREEN_WIDTH*0.65, SCREEN_HEIGHT*0.1, 80, 50, "<")
+		
+		view.redraw(screen, SCREEN_WIDTH, SCREEN_HEIGHT, 
+			right_triangle_button, up_triangle_button, left_triangle_button)
+
+		controller.run(right_triangle_button, up_triangle_button, left_triangle_button, screen, SCREEN_WIDTH, SCREEN_HEIGHT)
 		pygame.display.flip()
 
 #SET FRACTALS
