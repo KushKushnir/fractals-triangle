@@ -27,35 +27,47 @@ class Controller():
 						self.view.redraw(screen, SCREEN_WIDTH, SCREEN_HEIGHT, 
 							right_triangle_button, up_triangle_button, 
 							left_triangle_button, reset_button)
-						self.model.draw_og_tri(
+
+						self.model.set_og_tri(
 							screen, SCREEN_WIDTH, SCREEN_HEIGHT)
-						self.model.set_right_tri(
-							screen, SCREEN_WIDTH, SCREEN_HEIGHT)
+
+						self.model.add_right()
+
+						self.model.draw_all(screen, SCREEN_WIDTH, SCREEN_HEIGHT)
+
 						pygame.display.update()
 					if up_triangle_button.is_over(mouse_pos):
 						self.view.redraw(screen, SCREEN_WIDTH, SCREEN_HEIGHT,
 							right_triangle_button, up_triangle_button, 
 							left_triangle_button, reset_button)
-						self.model.draw_og_tri(
+
+						self.model.set_og_tri(
 							screen, SCREEN_WIDTH, SCREEN_HEIGHT)
-						self.model.set_up_tri(
-							screen, SCREEN_WIDTH, SCREEN_HEIGHT)
+
+						self.model.add_up()
+
+						self.model.draw_all(screen, SCREEN_WIDTH, SCREEN_HEIGHT)
+
 						pygame.display.update()
 					if left_triangle_button.is_over(mouse_pos):
 						self.view.redraw(screen, SCREEN_WIDTH, SCREEN_HEIGHT, 
 							right_triangle_button, up_triangle_button, 
 							left_triangle_button, reset_button)
-						self.model.draw_og_tri(
+
+
+						self.model.set_og_tri(
 							screen, SCREEN_WIDTH, SCREEN_HEIGHT)
-						self.model.set_left_tri(
-							screen, SCREEN_WIDTH, SCREEN_HEIGHT)
+
+						self.model.add_left()
+
+						self.model.draw_all(screen, SCREEN_WIDTH, SCREEN_HEIGHT)
+
 						pygame.display.update()
 					if reset_button.is_over(mouse_pos):
 						self.model.reset()
 						self.view.redraw(screen, SCREEN_WIDTH, SCREEN_HEIGHT, 
 							right_triangle_button, up_triangle_button, 
 							left_triangle_button, reset_button)
-						pygame.display.update()
 
 
 
