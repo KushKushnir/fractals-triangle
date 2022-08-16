@@ -14,7 +14,7 @@ class Triangle():
 class Model():
 	end_game = 0
 	num_triangles = 0
-	og_tri = 0
+	original_triangle = 0
 	arr = []
 
 	def __init__(self):
@@ -23,40 +23,119 @@ class Model():
 	def printMsg(self):
 		print("Model init")
 
-	def set_og_tri(self, screen, SCREEN_WIDTH, SCREEN_HEIGHT):
-		self.num_triangles += 1
-		self.og_tri = Triangle(screen, SCREEN_WIDTH, SCREEN_HEIGHT)
+	#IN MODEL
+	def set_second_triangle(self):
+		self.original_triangle.bot = [
+			self.original_triangle.left[2] + (self.original_triangle.left[2] - 
+			self.midpoint(self.original_triangle.left[0], self.original_triangle.left[2])),
+			self.midpoint(self.original_triangle.left[3], self.original_triangle.left[1]),
+			self.midpoint(self.original_triangle.left[0], self.original_triangle.left[2]),
+			self.midpoint(self.original_triangle.left[3], self.original_triangle.left[1])]
+			
+		self.original_triangle.left = [
+			self.original_triangle.left[2],
+			self.original_triangle.left[1],
+			self.original_triangle.bot[0],
+			self.original_triangle.bot[1]]
 
-		self.draw_triangles(screen, 
-			SCREEN_WIDTH, SCREEN_HEIGHT, 1)
-
-		if self.num_triangles > 1:
-			self.og_tri.bot = [
-				self.og_tri.left[2] + (self.og_tri.left[2] - 
-					self.midpoint(self.og_tri.left[0], self.og_tri.left[2])),
-				self.midpoint(self.og_tri.left[3], self.og_tri.left[1]),
-				self.midpoint(self.og_tri.left[0], self.og_tri.left[2]),
-				self.midpoint(self.og_tri.left[3], self.og_tri.left[1])]
-
-			self.og_tri.left = [
-				self.og_tri.left[2],
-				self.og_tri.left[1],
-				self.og_tri.bot[0],
-				self.og_tri.bot[1]]
-
-			self.og_tri.right = [
-				self.og_tri.left[0],
-				self.og_tri.left[1],
-				self.og_tri.bot[2],
-				self.og_tri.bot[3]]
-
-			self.draw_triangles(screen, SCREEN_WIDTH, SCREEN_HEIGHT,2)
+		self.original_triangle.right = [
+			self.original_triangle.left[0],
+			self.original_triangle.left[1],
+			self.original_triangle.bot[2],
+			self.original_triangle.bot[3]]
 
 
-	def draw_all(self, screen, SCREEN_WIDTH, SCREEN_HEIGHT):
+	#IN MODEL
+	def add_up(self):
+		self.arr.append("^")
+	#IN MODEL
+	def add_left(self):
+		self.arr.append("<")
+	#IN MODEL
+	def add_right(self):
+		self.arr.append(">")
+
+	#IN MODEL
+	def set_up_tri(self, screen, SCREEN_WIDTH, SCREEN_HEIGHT):
+		self.original_triangle.bot = [
+			self.midpoint(self.original_triangle.left[0],self.original_triangle.left[2]),#x2
+				self.original_triangle.left[3] - 
+				(self.midpoint(self.original_triangle.left[1], self.original_triangle.left[3])
+				- self.original_triangle.left[3]),#y2
+			self.midpoint(self.original_triangle.right[0],self.original_triangle.right[2]),#x2
+			self.original_triangle.right[3] - 
+				(self.midpoint(self.original_triangle.right[1], self.original_triangle.right[3])
+				- self.original_triangle.right[3])]#y2
+
+		self.original_triangle.right = [
+			self.midpoint(self.original_triangle.bot[2], self.original_triangle.bot[0]),
+			self.original_triangle.left[3], 
+			self.original_triangle.bot[2],
+			self.original_triangle.bot[3]]
+
+		self.original_triangle.left = [
+			self.midpoint(self.original_triangle.bot[2], self.original_triangle.bot[0]), 
+			self.original_triangle.left[3], 
+			self.original_triangle.bot[0], 
+			self.original_triangle.bot[1]]
+
+	#IN MODEL
+	def set_left_tri(self, screen, SCREEN_WIDTH, SCREEN_HEIGHT):
+		self.original_triangle.bot = [
+			self.midpoint(self.original_triangle.right[2], self.original_triangle.right[0]),
+			self.midpoint(self.original_triangle.right[3], self.original_triangle.right[1]),
+			self.original_triangle.right[2] - 
+				(self.midpoint(self.original_triangle.right[2], self.original_triangle.right[0])
+				- self.original_triangle.right[2]),
+			self.midpoint(self.original_triangle.right[3], self.original_triangle.right[1])]
+
+		self.original_triangle.left = [
+			self.original_triangle.right[2],
+			self.original_triangle.right[1],
+			self.original_triangle.bot[0],
+			self.original_triangle.bot[1]]
+
+		self.original_triangle.right = [
+			self.original_triangle.right[2],
+			self.original_triangle.right[1],
+			self.original_triangle.bot[2],
+			self.original_triangle.bot[3]]
+
+	#IN MODEL
+	def set_right_tri(self, screen, SCREEN_WIDTH, SCREEN_HEIGHT):
+		self.original_triangle.bot = [
+			self.original_triangle.left[2] + (self.original_triangle.left[2] - 
+				self.midpoint(self.original_triangle.left[2], self.original_triangle.left[0])),
+			self.midpoint(self.original_triangle.left[3], self.original_triangle.left[1]),
+			self.midpoint(self.original_triangle.left[2], self.original_triangle.left[0]),
+			self.midpoint(self.original_triangle.left[3], self.original_triangle.left[1])]
+
+		self.original_triangle.right = [
+			self.original_triangle.left[2],
+			self.original_triangle.left[1],
+			self.original_triangle.bot[2],
+			self.original_triangle.bot[3]]
+
+		self.original_triangle.left = [
+			self.original_triangle.left[2],
+			self.original_triangle.left[1],
+			self.original_triangle.bot[0],
+			self.original_triangle.bot[1]]
+
+	#IN MODEL
+	def reset(self):
+		self.num_triangles = 0
+		self.arr.clear()
+
+	#IN MODEL
+	def midpoint(self, z1, z2):
+		return ((z1 - z2) //2) + z2
+
+	#In VIEW
+	def set_all(self, screen, SCREEN_WIDTH, SCREEN_HEIGHT):
 		for i, n in enumerate(self.arr[2:]):
-			print(self.num_triangles)
-			print("i = ",i, " n = ", n)
+			#print(self.num_triangles)
+			#print("i = ",i, " n = ", n)
 			if n == "^":
 				self.set_up_tri(screen, SCREEN_WIDTH, SCREEN_HEIGHT)
 			elif n == ">":
@@ -68,131 +147,48 @@ class Model():
 			self.draw_triangles(screen, SCREEN_WIDTH, SCREEN_HEIGHT, i)
 
 
-	def add_up(self):
-		self.arr.append("^")
-
-	def add_left(self):
-		self.arr.append("<")
-
-	def add_right(self):
-		self.arr.append(">")
-
-
-	def set_up_tri(self, screen, SCREEN_WIDTH, SCREEN_HEIGHT):
-		self.og_tri.bot = [
-			self.midpoint(self.og_tri.left[0],self.og_tri.left[2]),#x2
-				self.og_tri.left[3] - 
-				(self.midpoint(self.og_tri.left[1], self.og_tri.left[3])
-				- self.og_tri.left[3]),#y2
-			self.midpoint(self.og_tri.right[0],self.og_tri.right[2]),#x2
-			self.og_tri.right[3] - 
-				(self.midpoint(self.og_tri.right[1], self.og_tri.right[3])
-				- self.og_tri.right[3])]#y2
-
-		self.og_tri.right = [
-			self.midpoint(self.og_tri.bot[2], self.og_tri.bot[0]),
-			self.og_tri.left[3], 
-			self.og_tri.bot[2],
-			self.og_tri.bot[3]]
-
-		self.og_tri.left = [
-			self.midpoint(self.og_tri.bot[2], self.og_tri.bot[0]), 
-			self.og_tri.left[3], 
-			self.og_tri.bot[0], 
-			self.og_tri.bot[1]]
-
-
-	def set_left_tri(self, screen, SCREEN_WIDTH, SCREEN_HEIGHT):
-		self.og_tri.bot = [
-			self.midpoint(self.og_tri.right[2], self.og_tri.right[0]),
-			self.midpoint(self.og_tri.right[3], self.og_tri.right[1]),
-			self.og_tri.right[2] - 
-				(self.midpoint(self.og_tri.right[2], self.og_tri.right[0])
-				- self.og_tri.right[2]),
-			self.midpoint(self.og_tri.right[3], self.og_tri.right[1])]
-
-		self.og_tri.left = [
-			self.og_tri.right[2],
-			self.og_tri.right[1],
-			self.og_tri.bot[0],
-			self.og_tri.bot[1]]
-
-		self.og_tri.right = [
-			self.og_tri.right[2],
-			self.og_tri.right[1],
-			self.og_tri.bot[2],
-			self.og_tri.bot[3]]
-
-
-	def set_right_tri(self, screen, SCREEN_WIDTH, SCREEN_HEIGHT):
-		self.og_tri.bot = [
-			self.og_tri.left[2] + (self.og_tri.left[2] - 
-				self.midpoint(self.og_tri.left[2], self.og_tri.left[0])),
-			self.midpoint(self.og_tri.left[3], self.og_tri.left[1]),
-			self.midpoint(self.og_tri.left[2], self.og_tri.left[0]),
-			self.midpoint(self.og_tri.left[3], self.og_tri.left[1])]
-
-		self.og_tri.right = [
-			self.og_tri.left[2],
-			self.og_tri.left[1],
-			self.og_tri.bot[2],
-			self.og_tri.bot[3]]
-
-		self.og_tri.left = [
-			self.og_tri.left[2],
-			self.og_tri.left[1],
-			self.og_tri.bot[0],
-			self.og_tri.bot[1]]
-
-
-	def reset(self):
-		self.num_triangles = 0
-		self.arr.clear()
-
-
-	def midpoint(self, z1, z2):
-		return ((z1 - z2) //2) + z2
-
+	#IN VIEW
+	def draw_original_triangle(self, screen, SCREEN_WIDTH, SCREEN_HEIGHT):
+		pygame.draw.line(screen, "white", 
+			(self.original_triangle.bot[2], self.original_triangle.bot[3]),# x2, y2
+			(self.original_triangle.bot[0], self.original_triangle.bot[1]), 3)# x1, y1
+		#Draw left
+		pygame.draw.line(screen, "white",
+			(self.original_triangle.left[2], self.original_triangle.left[3]),# x2, y2
+			(self.original_triangle.left[0], self.original_triangle.left[1]), 3)# x1, y1
+		#draw right
+		pygame.draw.line(screen, "white", 
+			(self.original_triangle.right[2], self.original_triangle.right[3]),# x2, y2
+			(self.original_triangle.right[0], self.original_triangle.right[1]), 3)# x1, y1
+	
+	#IN VIEW
 	def draw_triangles(self, screen, SCREEN_WIDTH, SCREEN_HEIGHT, i):
-		if i == self.num_triangles:
+		self.draw_original_triangle(screen, SCREEN_WIDTH, SCREEN_HEIGHT)
+		if i == self.num_triangles - 3 and self.num_triangles >= 3:
 			#draw bot
 			pygame.draw.line(screen, "red", 
-				(self.og_tri.bot[2], self.og_tri.bot[3]),# x2, y2
-				(self.og_tri.bot[0], self.og_tri.bot[1]), 3)# x1, y1
+				(self.original_triangle.bot[2], self.original_triangle.bot[3]),# x2, y2
+				(self.original_triangle.bot[0], self.original_triangle.bot[1]), 3)# x1, y1
 			#Draw left
 			pygame.draw.line(screen, "red",
-				(self.og_tri.left[2], self.og_tri.left[3]),# x2, y2
-				(self.og_tri.left[0], self.og_tri.left[1]), 3)# x1, y1
+				(self.original_triangle.left[2], self.original_triangle.left[3]),# x2, y2
+				(self.original_triangle.left[0], self.original_triangle.left[1]), 3)# x1, y1
 			#draw right
 			pygame.draw.line(screen, "red", 
-				(self.og_tri.right[2], self.og_tri.right[3]),# x2, y2
-				(self.og_tri.right[0], self.og_tri.right[1]), 3)# x1, y1
-		else:
-			# else:
-			#draw bot
-			pygame.draw.line(screen, "white", 
-				(self.og_tri.bot[2], self.og_tri.bot[3]),# x2, y2
-				(self.og_tri.bot[0], self.og_tri.bot[1]), 3)# x1, y1
-			#Draw left
-			pygame.draw.line(screen, "white",
-				(self.og_tri.left[2], self.og_tri.left[3]),# x2, y2
-				(self.og_tri.left[0], self.og_tri.left[1]), 3)# x1, y1
-			#draw right
-			pygame.draw.line(screen, "white", 
-				(self.og_tri.right[2], self.og_tri.right[3]),# x2, y2
-				(self.og_tri.right[0], self.og_tri.right[1]), 3)# x1, y1
-			if i == self.num_triangles - 3 and self.num_triangles >= 3:
-				#draw bot
-				pygame.draw.line(screen, "red", 
-					(self.og_tri.bot[2], self.og_tri.bot[3]),# x2, y2
-					(self.og_tri.bot[0], self.og_tri.bot[1]), 3)# x1, y1
-				#Draw left
-				pygame.draw.line(screen, "red",
-					(self.og_tri.left[2], self.og_tri.left[3]),# x2, y2
-					(self.og_tri.left[0], self.og_tri.left[1]), 3)# x1, y1
-				#draw right
-				pygame.draw.line(screen, "red", 
-					(self.og_tri.right[2], self.og_tri.right[3]),# x2, y2
-					(self.og_tri.right[0], self.og_tri.right[1]), 3)# x1, y1
+				(self.original_triangle.right[2], self.original_triangle.right[3]),# x2, y2
+				(self.original_triangle.right[0], self.original_triangle.right[1]), 3)# x1, y1
+
+	#IN VIEW
+	def set_original_triangle(self, screen, SCREEN_WIDTH, SCREEN_HEIGHT):
+		self.num_triangles += 1
+		self.original_triangle = Triangle(screen, SCREEN_WIDTH, SCREEN_HEIGHT)
+
+		self.draw_original_triangle(screen,SCREEN_WIDTH, SCREEN_HEIGHT)
+
+		if self.num_triangles > 1:
+			self.set_second_triangle()
+			self.draw_original_triangle(screen, SCREEN_WIDTH, SCREEN_HEIGHT)
+
+
 
 

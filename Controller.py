@@ -28,12 +28,12 @@ class Controller():
 							right_triangle_button, up_triangle_button, 
 							left_triangle_button, reset_button)
 
-						self.model.set_og_tri(
+						self.model.set_original_triangle(
 							screen, SCREEN_WIDTH, SCREEN_HEIGHT)
 
 						self.model.add_right()
 
-						self.model.draw_all(screen, SCREEN_WIDTH, SCREEN_HEIGHT)
+						self.model.set_all(screen, SCREEN_WIDTH, SCREEN_HEIGHT)
 
 						pygame.display.update()
 					if up_triangle_button.is_over(mouse_pos):
@@ -41,12 +41,12 @@ class Controller():
 							right_triangle_button, up_triangle_button, 
 							left_triangle_button, reset_button)
 
-						self.model.set_og_tri(
+						self.model.set_original_triangle(
 							screen, SCREEN_WIDTH, SCREEN_HEIGHT)
 
 						self.model.add_up()
 
-						self.model.draw_all(screen, SCREEN_WIDTH, SCREEN_HEIGHT)
+						self.model.set_all(screen, SCREEN_WIDTH, SCREEN_HEIGHT)
 
 						pygame.display.update()
 					if left_triangle_button.is_over(mouse_pos):
@@ -55,12 +55,12 @@ class Controller():
 							left_triangle_button, reset_button)
 
 
-						self.model.set_og_tri(
+						self.model.set_original_triangle(
 							screen, SCREEN_WIDTH, SCREEN_HEIGHT)
 
 						self.model.add_left()
 
-						self.model.draw_all(screen, SCREEN_WIDTH, SCREEN_HEIGHT)
+						self.model.set_all(screen, SCREEN_WIDTH, SCREEN_HEIGHT)
 
 						pygame.display.update()
 					if reset_button.is_over(mouse_pos):
