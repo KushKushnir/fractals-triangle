@@ -35,12 +35,18 @@ class Main():
 		pygame.font.init()
 		pygame.display.init()
 		screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT), pygame.RESIZABLE)
-		screen.fill((100,100,100))
+		screen.fill("#191970")
 		caption = "Sierpinski's Triangle"
 		pygame.display.set_caption(caption)
+
+		#Start screen text
+		startFont = pygame.font.SysFont('merriweather', 70)
+		startText = startFont.render("Click to Start", True, "white")
+		textRect = startText.get_rect(center=(SCREEN_WIDTH/2, SCREEN_HEIGHT/2))
+		screen.blit(startText, textRect)
 		pygame.display.flip()
 
-		#Run up Start Screen
+		#Run Start Screen
 		while before_game == 0:
 			for event in pygame.event.get():
 				if event.type == pygame.VIDEORESIZE:
@@ -76,13 +82,7 @@ class Main():
 			SCREEN_WIDTH, SCREEN_HEIGHT)
 		pygame.display.flip()
 
-#SET FRACTALS
-#EXCEPTIONS
-#TEST DRIVEN DEVELOPMENT
 
-#PEP8
-#MVC
-start = Main()
-
-
+if __name__ == "__main__":
+	Main()
 

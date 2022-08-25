@@ -17,8 +17,6 @@ class Controller():
 		while self.model.end_game == 0:
 			for event in pygame.event.get():
 				mouse_pos = pygame.mouse.get_pos()
-				if event.type == pygame.VIDEORESIZE:
-					screen_width, screen_height = pygame.VIDEORESIZE
 				if event.type == pygame.QUIT:
 					raise SystemExit
 				if event.type == pygame.MOUSEBUTTONDOWN:
@@ -28,12 +26,12 @@ class Controller():
 							right_triangle_button, up_triangle_button, 
 							left_triangle_button, reset_button)
 
-						self.model.set_original_triangle(
+						self.view.set_original_triangle(
 							screen, SCREEN_WIDTH, SCREEN_HEIGHT)
 
 						self.model.add_right()
 
-						self.model.set_all(screen, SCREEN_WIDTH, SCREEN_HEIGHT)
+						self.view.set_all(screen, SCREEN_WIDTH, SCREEN_HEIGHT)
 
 						pygame.display.update()
 					if up_triangle_button.is_over(mouse_pos):
@@ -41,12 +39,12 @@ class Controller():
 							right_triangle_button, up_triangle_button, 
 							left_triangle_button, reset_button)
 
-						self.model.set_original_triangle(
+						self.view.set_original_triangle(
 							screen, SCREEN_WIDTH, SCREEN_HEIGHT)
 
 						self.model.add_up()
 
-						self.model.set_all(screen, SCREEN_WIDTH, SCREEN_HEIGHT)
+						self.view.set_all(screen, SCREEN_WIDTH, SCREEN_HEIGHT)
 
 						pygame.display.update()
 					if left_triangle_button.is_over(mouse_pos):
@@ -55,12 +53,12 @@ class Controller():
 							left_triangle_button, reset_button)
 
 
-						self.model.set_original_triangle(
+						self.view.set_original_triangle(
 							screen, SCREEN_WIDTH, SCREEN_HEIGHT)
 
 						self.model.add_left()
 
-						self.model.set_all(screen, SCREEN_WIDTH, SCREEN_HEIGHT)
+						self.view.set_all(screen, SCREEN_WIDTH, SCREEN_HEIGHT)
 
 						pygame.display.update()
 					if reset_button.is_over(mouse_pos):
