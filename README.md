@@ -36,11 +36,16 @@ https://www.python.org/downloads/
 
 ##### To download Pygame:
 In your terminal, type:
+
 python3 -m pip install -U pygame
+
 This will download pygame globally.
 If you want Pygame only on your current user type:
+
 python3 -m pip install -U pygame --user
 
 Once you have both dependencies installed, make sure you are in the
 "triangles" directory in your terminal and type:
-#### python Start.py
+
+python Start.py
+
